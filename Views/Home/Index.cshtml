@@ -1,0 +1,26 @@
+﻿@model PostsListViewModel
+@using Microsoft.AspNetCore.Identity
+@{
+    ViewData["returnUrl"] = @ViewContext.HttpContext.Request.PathAndQuery();
+    ViewData["userId"] = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+    ViewData["admin"] = User.IsInRole("Admin") || User.IsInRole("Dashboard");
+}
+
+@if (Model?.Films?.Count() > 0)
+{
+    <div class="row">
+    <div class="col-10">
+        @foreach (Film film in Model.Films)
+        {
+            <partial name="Post" model="film" view-data="ViewData" />
+        }
+        <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+            page-class="btn rounded-pill" page-class-normal="btn-light" page-url-genre="@Model.CurrentGenre ?? string.Empty"
+            page-class-selected="btn-info" page-class-padding="px-3" class="btn-group">
+        </div>
+    </div>
+    <div id="genres" class="col-2 my-4">
+        <vc:navigation-menu />
+    </div>
+</div>
+}

@@ -1,0 +1,20 @@
+﻿@{
+    string navbarTheme = ViewData["bgDark"] as bool? == true ? "navbar-dark" : "navbar-light";
+}
+
+<header>
+    <nav class="navbar @(navbarTheme) navbar-expand-sm navbar-toggleable-sm border-bottom border-secondary box-shadow">
+        <div class="container">
+            <a class="navbar-brand" href="/">Каталог фильмов</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+</header>

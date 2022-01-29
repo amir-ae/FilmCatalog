@@ -1,0 +1,22 @@
+﻿@model NavigationMenuViewModel
+
+@if (Model?.Genres?.Count() > 0)
+{
+    <div class="d-grid">
+        @foreach (string genre in Model.Genres)
+        {
+            <a class="btn @(genre == Model.SelectedGenre ? "btn-info" : "btn-light") my-1"
+                asp-controller="Home" asp-action="Index"
+                asp-route-genre="@genre"
+                asp-route-page="1">
+                @genre
+            </a>
+        }
+        <a class="btn @(Model.SelectedGenre == null ? "btn-info" : "btn-light") my-1"
+            asp-controller="Home" asp-action="Index"
+            asp-route-genre=""
+            asp-route-page="1">
+            All
+        </a>
+    </div>
+}

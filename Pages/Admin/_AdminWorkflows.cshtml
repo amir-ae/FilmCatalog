@@ -1,0 +1,37 @@
+﻿@model (string workflow, string theme)
+@{
+    Func<string, string> getClass = (string feature) =>
+                                        feature != null && feature.Equals(Model.workflow) ? "active" : "";
+}
+<div class="d-grid">
+    <a class="btn btn-@Model.theme @getClass("Dashboard") my-1" asp-page="Dashboard">
+        Dashboard
+    </a>
+    <a class="btn btn-@Model.theme @getClass("Features") my-1" asp-page="Features">
+        Features
+    </a>
+    <a class="btn btn-@Model.theme @getClass("View") my-1" asp-page="View" asp-route-id="">
+        List Users
+    </a>
+    <a class="btn btn-@Model.theme @getClass("Create") my-1" asp-page="Create">
+        Create Account
+    </a>
+    <a class="btn btn-@Model.theme @getClass("Delete") my-1" asp-page="Delete">
+        Delete Account
+    </a>
+    <a class="btn btn-@Model.theme @getClass("Edit") my-1" asp-page="Edit" asp-route-id="">
+        Edit Users
+    </a>
+    <a class="btn btn-@Model.theme @getClass("Passwords") my-1" asp-page="Passwords" asp-route-id="">
+        Passwords
+    </a>
+    <a class="btn btn-@Model.theme @getClass("Lockouts") my-1" asp-page="Lockouts">
+        Lockouts
+    </a>
+    <a class="btn btn-@Model.theme @getClass("Roles") my-1" asp-page="Roles" asp-route-id="">
+        Edit Roles
+    </a>
+    <a class="btn btn-@Model.theme @getClass("Claims") my-1" asp-page="Claims" asp-route-id="">
+        Claims
+    </a>
+</div>

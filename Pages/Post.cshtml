@@ -1,0 +1,72 @@
+﻿@page "{Task?}/{Id?}"
+@model FilmCatalog.Pages.PostModel
+@{
+    ViewBag.Workflow = Model.Label ?? "CreatePost";
+    string Action = Model.ViewModel.Action;
+    string ActionRu = Model.ViewModel.ActionRu;
+    string Theme = Model.ViewModel.Theme;
+    bool ReadOnly = Model.ViewModel.ReadOnly;
+    bool ShowPoster = Model.ViewModel.ShowPoster;
+    bool ShowAction = Model.ViewModel.ShowAction;
+    bool ShowBack = Model.ViewModel.ShowBack;
+}
+
+<h5 class="bg-@Theme text-white text-center p-2 mb-3">@ActionRu</h5>
+<div class="text-warning" asp-validation-summary="ModelOnly"></div>
+<form asp-action="@Action" enctype="multipart/form-data" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group my-2" hidden="@(Model.Film.FilmId == 0))">
+        <label asp-for="Film.FilmId"></label>
+        <input asp-for="Film.FilmId" class="form-control" readonly />
+    </div>
+    <div class="form-group my-2">
+        <label asp-for="Film.Title"></label>
+        <div>
+            <span asp-validation-for="Film.Title" class="text-warning"></span>
+        </div>
+        <input asp-for="Film.Title" class="form-control"
+               readonly="@ReadOnly" />
+    </div>
+    <div class="form-group my-2">
+        <label asp-for="Film.Description"></label>
+        <div>
+            <span asp-validation-for="Film.Description" class="text-warning"></span>
+        </div>
+        <textarea asp-for="Film.Description" rows="4" class="form-control"
+                  readonly="@ReadOnly"></textarea>
+    </div>
+    @if (ShowPoster)
+    {
+        <div class="row">
+            <div class="col-7">
+                <partial name="_PostPartial" model="@Model" />
+            </div>
+            <div class="col-5">
+                <div class="form-group my-2">
+                    <label asp-for="Film.PosterFile"></label>
+                    <div>
+                        <img src="@($"~/images/{Model.Film.Poster}")"
+                         asp-append-version="true"
+                         class="h-100" style="max-width: 250px;max-height:350px;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <partial name="_PostPartial" model="@Model" />
+    }
+    <input type="hidden" asp-for="Film.Poster" />
+    <input type="hidden" asp-for="Film.UserId" />
+    <input type="hidden" asp-for="Film.Registration" />
+    <input type="hidden" asp-for="ReturnUrl" />
+    @if (ShowAction)
+    {
+        <button class="btn btn-@Theme" type="submit">@ActionRu</button>
+    }
+    @if (ShowBack)
+    {
+        <a class="btn btn-secondary" href="@Model.ReturnUrl">Назад</a>
+    }
+</form>

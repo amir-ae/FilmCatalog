@@ -1,0 +1,33 @@
+﻿@model Film
+@{
+    string? userId = ViewData["userId"] as string;
+    string? returnUrl = ViewData["returnUrl"] as string;
+    bool admin = ViewData["admin"] as bool? ?? false;
+}
+<div class="card bg-light border-dark my-4">
+    <div class="d-flex justify-content-between">
+        <div class="w-100 m-2 p-2">
+            <div class="p-2">
+                <h4 class="text-center text-danger">
+                    @Model?.Title
+                </h4>
+            </div>
+            <div class="card-text p-1">
+                @Model?.Description
+            </div>
+            <div class="card-text p-1">
+                <b class="text-muted">Director: </b>@Model?.Director
+            </div>
+            <div class="card-text p-1">
+                <b class="text-muted">Genre: </b>@Model?.Genre
+            </div>
+        </div>
+        <div class="align-self-center">
+            <div class="align-middle">
+                <img src="@($"~/images/{Model?.Poster}")"
+                     asp-append-version="true"
+                     class="h-100" style="max-width: 250px;max-height:350px;" />
+            </div>
+        </div>
+    </div>
+</div>

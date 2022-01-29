@@ -1,0 +1,56 @@
+﻿@model FilmCatalog.Pages.PostModel
+@{
+    bool ReadOnly = Model?.ViewModel.ReadOnly ?? true;
+    bool ShowPosterInput = Model?.ViewModel.ShowPosterInput ?? true;
+    bool ChangePoster = Model?.ViewModel.ChangePoster ?? true;
+    bool ShowRegistration = Model?.ViewModel.ShowRegistration ?? true;
+}
+
+<div class="form-group my-2">
+    <label asp-for="Film.Director"></label>
+    <div>
+        <span asp-validation-for="Film.Director" class="text-warning"></span>
+    </div>
+    <input asp-for="Film.Director" class="form-control"
+       readonly="@ReadOnly" />
+</div>
+<div class="form-group my-2">
+    <label asp-for="Film.Year"></label>
+    <div>
+        <span asp-validation-for="Film.Year" class="text-warning"></span>
+    </div>
+    <input asp-for="Film.Year" class="form-control"
+       readonly="@ReadOnly" />
+</div>
+<div class="form-group my-2">
+    <label asp-for="Film.Genre"></label>
+    <div>
+        <span asp-validation-for="Film.Genre" class="text-warning"></span>
+    </div>
+    <input asp-for="Film.Genre" class="form-control"
+       readonly="@ReadOnly" />
+</div>
+@if (ShowPosterInput)
+{
+    <div class="form-group mb-5">
+        <label asp-for="Film.PosterFile">
+            @if (ChangePoster)
+            {
+                @("Изменить постер")
+            }
+        </label>
+        <div>
+            <span asp-validation-for="Film.PosterFile" class="text-warning"></span>
+        </div>
+        <input asp-for="Film.PosterFile" accept="image/*" />
+    </div>
+}
+@if (ShowRegistration)
+{
+    <div class="form-group my-2">
+        <label asp-for="Film.Registration"></label>
+        <input name="Registration" type="text" readonly
+       value="@Model?.Film.Registration.ToString("G", CultureInfo.CreateSpecificCulture("ru-Ru"))"
+       class="form-control" />
+    </div>
+}

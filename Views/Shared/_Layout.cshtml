@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["bgDark"] = true;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Каталог фильмов</title>
+    <link rel="stylesheet" href="/lib/twitter-bootstrap/css/bootstrap.min.css" />
+</head>
+<body class="bg-dark">
+    <partial name="_HeaderPartial" />
+    <div class="container pt-1 pb-4">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top border-secondary footer text-light">
+        <div class="container">
+            &copy; @DateTime.Now.Year - Каталог фильмов
+        </div>
+    </footer>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
